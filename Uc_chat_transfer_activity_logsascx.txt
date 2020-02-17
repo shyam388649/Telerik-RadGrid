@@ -1,0 +1,58 @@
+<telerik:RadGrid ID="MainRadGrid" AllowPaging="True" runat="server" CellSpacing="0" Height="100%" Width="100%"
+                    AutoGenerateColumns="false" OnNeedDataSource="MainRadGrid_NeedDataSource" AllowCustomPaging="true">
+                    <GroupingSettings CaseSensitive="false"></GroupingSettings>
+                    <MasterTableView EditMode="InPlace" OverrideDataSourceControlSorting="true" TableLayout="Fixed" Width="100%"
+                        AllowFilteringByColumn="True" ShowFooter="true" CommandItemDisplay="None" PagerStyle-AlwaysVisible="true">
+                        <%--<GroupByExpressions>
+                            <telerik:GridGroupByExpression>
+                                <GroupByFields>
+                                    <telerik:GridGroupByField FieldName="ClientName" HeaderText="Client Name" SortOrder="Ascending" />
+                                </GroupByFields>
+                                <SelectFields>
+                                    <telerik:GridGroupByField HeaderText="Client Name" FieldName="ClientName" />
+                                </SelectFields>
+                            </telerik:GridGroupByExpression>
+                        </GroupByExpressions>--%>
+                        <CommandItemSettings ShowExportToCsvButton="true" AddNewRecordText="Add New User" ShowAddNewRecordButton="false"></CommandItemSettings>
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="TransferType" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="TransferType"
+                                HeaderText="Type" SortExpression="TransferType" FilterControlWidth="30%">
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="TransferedBy" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="TransferedBy"
+                                HeaderText="By" SortExpression="TransferedBy" FilterControlWidth="30%">
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="TransferedTo" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="TransferedTo"
+                                HeaderText="To" SortExpression="TransferedTo" FilterControlWidth="30%">
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridTemplateColumn DataField="TransferedContact" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="TransferedContact"
+                                HeaderText="Contact" SortExpression="TransferedContact" FilterControlWidth="30%">
+                                <ItemTemplate>
+                                    <a title="" class="tip" data-toggle="tooltip" data-placement="right" data-original-title='<%#Eval("TransferedContactDetail") %>'><span class="title"><%#Eval("TransferedContact") %></span></a>
+                                </ItemTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridDateTimeColumn DataField="TransferDate" UniqueName="TransferDate" HeaderText="Date" SortExpression="TransferDate" DataFormatString="{0:MM/dd/yy hh:mm}" FilterControlWidth="70%" PickerType="DatePicker" CurrentFilterFunction="EqualTo" AutoPostBackOnFilter="true" EnableTimeIndependentFiltering="true">
+                            </telerik:GridDateTimeColumn>
+                            <telerik:GridBoundColumn DataField="Action" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="Action"
+                                HeaderText="Action" SortExpression="Action" FilterControlWidth="30%">
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ActionByName" AutoPostBackOnFilter="true" CurrentFilterFunction="Contains" UniqueName="ActionByName"
+                                HeaderText="Action By" SortExpression="ActionByName" FilterControlWidth="30%">
+                                <ItemStyle HorizontalAlign="Left" />
+                                <HeaderStyle HorizontalAlign="Left" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ActionDate" UniqueName="ActionDate" HeaderText="Action Date" SortExpression="ActionDate" DataFormatString="{0:MM/dd/yy hh:mm}" FilterControlWidth="30%">
+                            </telerik:GridBoundColumn>
+                        </Columns>
+                    </MasterTableView>
+                    <ExportSettings FileName="Chat Transfer Logs" />
+                </telerik:RadGrid>

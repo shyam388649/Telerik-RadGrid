@@ -1,0 +1,27 @@
+ public ChatTransferLogs ChatTransferLogSelect_New(int startIndex, int numberOfRows, int? clientId, double? userTimeZone)
+        {
+            DataSet DS = GenericClass.SelectDS(new object[] { "Usp_Chat_Transfer_Log_Select_New",
+                                                                 "@Start_Index",startIndex,
+                                                                "@Number_Of_Rows",numberOfRows,
+                                                            "@CLNT_Id",clientId});
+            ChatTransferLogs autoResponders = new ChatTransferLogs { chatTransferLog = new List<ChatTransferLog>() };
+            autoResponders.TotalRecords = Convert.ToInt32(DS.Tables[0].Rows[0]["Records_Count"]);
+
+            foreach (DataRow row in DS.Tables[1].Rows)
+            {
+                autoResponders.chatTransferLog.Add(new ChatTransferLog()
+                {
+                    Id = Convert.ToInt32(row["Chat_Transfer_Id"]),
+                    TransferType = Convert.ToInt32(row["Chat_Transfer_Type"]) == 1 ? "User" : "Department",
+                    TransferedBy = row["Transferred_By"].ToString(),
+                    TransferedTo = row["Transferred_To"].ToString(),
+                    TransferedContact = row["Transferred_Contact"].ToString(),
+                    TransferedContactDetail = row["CNT_DTL_Detail"].ToString(),
+                    TransferDate = Convert.ToString(cTimeZone.ConvertToClientDate(Convert.ToString(row["Chat_Transfer_Date"]), userTimeZone)),
+                    Action = row["Chat_Transfer_Action"] == DBNull.Value ? "" : Convert.ToInt32(row["Chat_Transfer_Action"]) == 1 ? "Accepted" : "Denied",
+                    ActionByName = row["TransferActionBy"].ToString(),
+                    ActionDate = Convert.ToString(cTimeZone.ConvertToClientDate(Convert.ToString(row["Chat_Transfer_ActionDate"]), userTimeZone)),
+                });
+            }
+            return autoResponders;
+        }

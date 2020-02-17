@@ -1,0 +1,5 @@
+ public class ChatTransferLogs
+    {
+        public int TotalRecords { get; set; }
+        public List<ChatTransferLog> chatTransferLog { get; set; }
+    }

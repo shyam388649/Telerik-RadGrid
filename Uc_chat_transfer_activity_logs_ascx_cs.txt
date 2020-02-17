@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Telerik.Web.UI;
+
+namespace PresentationLayer.uc
+{
+    public partial class uc_chat_transfer_activity_logs : System.Web.UI.UserControl
+    {
+        BusinessLayer.Message.Message_Bal messagebal = new BusinessLayer.Message.Message_Bal();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void MainRadGrid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            int startIndex = MainRadGrid.CurrentPageIndex;
+            int numberOfRows = MainRadGrid.PageSize;
+
+
+            BusinessLayer.Message.Message_Bal messagebal = new BusinessLayer.Message.Message_Bal();
+
+            Entities.Message.Chat.ChatTransferLogs chatTransferLogs = messagebal.ChatTransferLogSelect_New(startIndex, numberOfRows, string.IsNullOrEmpty(Convert.ToString(Session["clientId"])) ? null : (int?)Convert.ToInt32(Session["clientId"]), Convert.ToDouble(Session["UserTimeZone"]));
+            MainRadGrid.VirtualItemCount = chatTransferLogs.TotalRecords;
+            MainRadGrid.DataSource = chatTransferLogs.chatTransferLog;
+        }
+    }
+}

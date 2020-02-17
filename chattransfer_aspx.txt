@@ -1,0 +1,41 @@
+<%@ Page Title="Chat Transfer Logs" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="chattransferlogs.aspx.cs" Inherits="PresentationLayer.Admin.chattransferlogs" %>
+
+<%@ Register Src="~/uc/uc_footer.ascx" TagPrefix="uc1" TagName="uc_footer" %>
+<%@ Register Src="~/uc/uc_chat_transfer_activity_logs.ascx" TagPrefix="uc1" TagName="uc_chat_transfer_activity_logs" %>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+    <telerik:RadAjaxManager ID="MainRadAjaxManager" runat="server" EnableAJAX="true">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="MainPanel">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="MainPanel" LoadingPanelID="MainRadAjaxLoadingPanel" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+        <ClientEvents OnRequestStart="onRequestStart" />
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="MainRadAjaxLoadingPanel" runat="server" Skin="Default" />
+    <div class="page-content">
+        <div class="content">
+            <div class="page-title">
+                <h3>Chat Transfer Logs</h3>
+                <div id="notydiv"></div>
+            </div>
+            <div id="container">
+                <asp:Panel ID="MainPanel" runat="server">
+                    <uc1:uc_chat_transfer_activity_logs runat="server" id="uc_chat_transfer_activity_logs" />
+                </asp:Panel>
+            </div>
+            <!-- BEGIN FOOTER -->
+            <div class="mainfooter">
+                <uc1:uc_footer runat="server" ID="uc_footer" />
+            </div>
+            <!-- END FOOTER -->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <div style="display: none;">
+        <telerik:RadComboBox ID="DummuyRadComboBox" runat="server" Visible="true"></telerik:RadComboBox>
+    </div>
+</asp:Content>
+

@@ -1,0 +1,4 @@
+public ChatTransferLogs ChatTransferLogSelect_New(int startIndex, int numberOfRows, int? clientId, double? userTimeZone)
+        {
+            return messageDalObj.ChatTransferLogSelect_New(startIndex, numberOfRows,clientId, userTimeZone);
+        }
